@@ -5,6 +5,7 @@ Repozitor sadrzi materijale za kurs Genomske informatike 2020 - Elektrotehnički
 Materijali za kurs Genomske informatike [2019](https://github.com/vladimirkovacevic/gi-2019-etf) i [2020](https://github.com/vladimirkovacevic/gi-2020-etf).
 
 Predavači:
+
 vladimir.kovacevic@sbgenomics.com
 General info (not relevant to all)
 Questions about lessons 1-6
