@@ -6,7 +6,7 @@ Materijali za kurs Genomske informatike [2019](https://github.com/vladimirkovace
 
 Predavači:
 
-vladimir.kovacevic@sbgenomics.com
+vladimir.kovacevic-ctr@sbgenomics.com
 General info (not relevant to all)
 Questions about lessons 1-6
 
