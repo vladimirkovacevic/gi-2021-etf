@@ -30,3 +30,5 @@ Questions about technical details and exercises
 **4. mart 2021.** Prvo online predavanje je odrzano. 
 
 **19. mart 2021.** 4. Predavanje iz Genomske informatike će biti održano u sredu, 24. marta u 18:15.
+
+**20. mart 2021.** Objavljeni su tekstovi 8 [projektnih zadataka](https://docs.google.com/document/d/18_voUiKjsy5YFkAbbjOvMtUlTZGb3OCxlYcGeTNjoKg/edit?usp=sharing) za koje se mogu studenti prijaviti.
