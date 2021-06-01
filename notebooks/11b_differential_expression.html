@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Diferencijalna ekspresija | Analiza RNA-Seq podataka</title>
+  <meta name="description" content="Materijali za deo kursa posvecen analizi RNA-Seq podataka" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Diferencijalna ekspresija | Analiza RNA-Seq podataka" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Materijali za deo kursa posvecen analizi RNA-Seq podataka" />
+  <meta name="github-repo" content="markozecevic/RNA-Seq" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Diferencijalna ekspresija | Analiza RNA-Seq podataka" />
+  
+  <meta name="twitter:description" content="Materijali za deo kursa posvecen analizi RNA-Seq podataka" />
+  
+
+<meta name="author" content="marko.zecevic@sbgenomics.com" />
+
+
+<meta name="date" content="2021-05-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="kvantifikacija.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Podešavanja</a></li>
+<li class="chapter" data-level="1" data-path="uvod.html"><a href="uvod.html"><i class="fa fa-check"></i><b>1</b> Uvod</a><ul>
+<li class="chapter" data-level="1.1" data-path="uvod.html"><a href="uvod.html#dnk-i-rnk"><i class="fa fa-check"></i><b>1.1</b> DNK i RNK</a></li>
+<li class="chapter" data-level="1.2" data-path="uvod.html"><a href="uvod.html#centralna-dogma-molekularne-biologije"><i class="fa fa-check"></i><b>1.2</b> Centralna dogma molekularne biologije</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="uvod.html"><a href="uvod.html#transkripcija"><i class="fa fa-check"></i><b>1.2.1</b> Transkripcija</a></li>
+<li class="chapter" data-level="1.2.2" data-path="uvod.html"><a href="uvod.html#splajsovanje"><i class="fa fa-check"></i><b>1.2.2</b> Splajsovanje</a></li>
+<li class="chapter" data-level="1.2.3" data-path="uvod.html"><a href="uvod.html#translacija"><i class="fa fa-check"></i><b>1.2.3</b> Translacija</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="uvod.html"><a href="uvod.html#vrste-rnk"><i class="fa fa-check"></i><b>1.3</b> Vrste RNK</a></li>
+<li class="chapter" data-level="1.4" data-path="uvod.html"><a href="uvod.html#alternativno-splajsovanje"><i class="fa fa-check"></i><b>1.4</b> Alternativno splajsovanje</a></li>
+<li class="chapter" data-level="1.5" data-path="uvod.html"><a href="uvod.html#ciljevi-proucavanja-rnk"><i class="fa fa-check"></i><b>1.5</b> Ciljevi proucavanja RNK</a></li>
+<li class="chapter" data-level="1.6" data-path="uvod.html"><a href="uvod.html#rnk-sekvenciranje"><i class="fa fa-check"></i><b>1.6</b> RNK sekvenciranje</a></li>
+<li class="chapter" data-level="1.7" data-path="uvod.html"><a href="uvod.html#dnk-mikročip-microarray"><i class="fa fa-check"></i><b>1.7</b> DNK mikročip (microarray)</a></li>
+<li class="chapter" data-level="1.8" data-path="uvod.html"><a href="uvod.html#literatura"><i class="fa fa-check"></i><b>1.8</b> Literatura</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="poravnanje.html"><a href="poravnanje.html"><i class="fa fa-check"></i><b>2</b> Poravnanje</a><ul>
+<li class="chapter" data-level="2.1" data-path="poravnanje.html"><a href="poravnanje.html#alignment-challenges"><i class="fa fa-check"></i><b>2.1</b> Alignment challenges</a></li>
+<li class="chapter" data-level="2.2" data-path="poravnanje.html"><a href="poravnanje.html#tophat2-algorithm"><i class="fa fa-check"></i><b>2.2</b> Tophat2 algorithm</a></li>
+<li class="chapter" data-level="2.3" data-path="poravnanje.html"><a href="poravnanje.html#alignment-file"><i class="fa fa-check"></i><b>2.3</b> Alignment file</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="kvantifikacija.html"><a href="kvantifikacija.html"><i class="fa fa-check"></i><b>3</b> Kvantifikacija</a><ul>
+<li class="chapter" data-level="3.1" data-path="kvantifikacija.html"><a href="kvantifikacija.html#motivation-for-rna-seq-quantification"><i class="fa fa-check"></i><b>3.1</b> Motivation for RNA-Seq quantification</a></li>
+<li class="chapter" data-level="3.2" data-path="kvantifikacija.html"><a href="kvantifikacija.html#rna-seq-quantification"><i class="fa fa-check"></i><b>3.2</b> RNA-Seq quantification</a></li>
+<li class="chapter" data-level="3.3" data-path="kvantifikacija.html"><a href="kvantifikacija.html#gene-level-quantification"><i class="fa fa-check"></i><b>3.3</b> Gene level quantification</a></li>
+<li class="chapter" data-level="3.4" data-path="kvantifikacija.html"><a href="kvantifikacija.html#within-sample-normalization"><i class="fa fa-check"></i><b>3.4</b> (Within-sample) Normalization</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="kvantifikacija.html"><a href="kvantifikacija.html#different-units"><i class="fa fa-check"></i><b>3.4.1</b> Different units</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="dekspresija.html"><a href="dekspresija.html"><i class="fa fa-check"></i><b>4</b> Diferencijalna ekspresija</a><ul>
+<li class="chapter" data-level="4.1" data-path="dekspresija.html"><a href="dekspresija.html#diferencijalna-eskpresija"><i class="fa fa-check"></i><b>4.1</b> Diferencijalna Eskpresija</a></li>
+<li class="chapter" data-level="4.2" data-path="dekspresija.html"><a href="dekspresija.html#between-sample-normalization"><i class="fa fa-check"></i><b>4.2</b> Between-sample normalization</a></li>
+<li class="chapter" data-level="4.3" data-path="dekspresija.html"><a href="dekspresija.html#exploratory-analysis"><i class="fa fa-check"></i><b>4.3</b> Exploratory analysis</a></li>
+<li class="chapter" data-level="4.4" data-path="dekspresija.html"><a href="dekspresija.html#intro-to-statistical-inference"><i class="fa fa-check"></i><b>4.4</b> Intro to statistical inference</a></li>
+<li class="chapter" data-level="4.5" data-path="dekspresija.html"><a href="dekspresija.html#central-limit-theorem"><i class="fa fa-check"></i><b>4.5</b> Central Limit Theorem</a></li>
+<li class="chapter" data-level="4.6" data-path="dekspresija.html"><a href="dekspresija.html#the-t-distribution"><i class="fa fa-check"></i><b>4.6</b> The t-distribution</a></li>
+<li class="chapter" data-level="4.7" data-path="dekspresija.html"><a href="dekspresija.html#multiple-testing"><i class="fa fa-check"></i><b>4.7</b> Multiple testing</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analiza RNA-Seq podataka</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="dekspresija" class="section level1">
+<h1><span class="header-section-number">4</span> Diferencijalna ekspresija</h1>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="dekspresija.html#cb62-1"></a><span class="kw">library</span>(Biobase)</span>
+<span id="cb62-2"><a href="dekspresija.html#cb62-2"></a><span class="kw">library</span>(DESeq2)</span>
+<span id="cb62-3"><a href="dekspresija.html#cb62-3"></a><span class="kw">library</span>(broom)</span>
+<span id="cb62-4"><a href="dekspresija.html#cb62-4"></a><span class="kw">library</span>(MASS)</span>
+<span id="cb62-5"><a href="dekspresija.html#cb62-5"></a><span class="kw">library</span>(ggplot2)</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="dekspresija.html#cb63-1"></a><span class="im">import</span> pysam</span>
+<span id="cb63-2"><a href="dekspresija.html#cb63-2"></a><span class="im">from</span> scipy <span class="im">import</span> stats</span>
+<span id="cb63-3"><a href="dekspresija.html#cb63-3"></a><span class="co"># import matplotlib.pyplot as plt</span></span>
+<span id="cb63-4"><a href="dekspresija.html#cb63-4"></a><span class="im">import</span> glob</span>
+<span id="cb63-5"><a href="dekspresija.html#cb63-5"></a><span class="im">import</span> os</span>
+<span id="cb63-6"><a href="dekspresija.html#cb63-6"></a></span>
+<span id="cb63-7"><a href="dekspresija.html#cb63-7"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb63-8"><a href="dekspresija.html#cb63-8"></a><span class="im">import</span> numpy <span class="im">as</span> np</span></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb64-1"><a href="dekspresija.html#cb64-1"></a><span class="kw">def</span> read_count(gene, bamfile):</span>
+<span id="cb64-2"><a href="dekspresija.html#cb64-2"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb64-3"><a href="dekspresija.html#cb64-3"></a><span class="co">    Compute the number of reads contained in a bamfile that overlap</span></span>
+<span id="cb64-4"><a href="dekspresija.html#cb64-4"></a><span class="co">    a given interval</span></span>
+<span id="cb64-5"><a href="dekspresija.html#cb64-5"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb64-6"><a href="dekspresija.html#cb64-6"></a>    bam_iter <span class="op">=</span> bamfile.fetch(gene[<span class="dv">0</span>], gene[<span class="dv">1</span>], gene[<span class="dv">2</span>])</span>
+<span id="cb64-7"><a href="dekspresija.html#cb64-7"></a></span>
+<span id="cb64-8"><a href="dekspresija.html#cb64-8"></a>    pysam_gene_count <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb64-9"><a href="dekspresija.html#cb64-9"></a>    </span>
+<span id="cb64-10"><a href="dekspresija.html#cb64-10"></a>    <span class="cf">for</span> x <span class="kw">in</span> bam_iter:</span>
+<span id="cb64-11"><a href="dekspresija.html#cb64-11"></a>        pysam_gene_count <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb64-12"><a href="dekspresija.html#cb64-12"></a>        </span>
+<span id="cb64-13"><a href="dekspresija.html#cb64-13"></a>    <span class="cf">return</span> pysam_gene_count</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="dekspresija.html#cb65-1"></a>paths <span class="op">=</span> glob.glob(<span class="st">&quot;/opt/aligned/*.bam&quot;</span>)</span>
+<span id="cb65-2"><a href="dekspresija.html#cb65-2"></a>paths</span></code></pre></div>
+<pre><code>## [&#39;/opt/aligned/sample_07_accepted_hits.bam&#39;, &#39;/opt/aligned/sample_10_accepted_hits.bam&#39;, &#39;/opt/aligned/sample_03_accepted_hits.bam&#39;, &#39;/opt/aligned/sample_09_accepted_hits.bam&#39;, &#39;/opt/aligned/sample_02_accepted_hits.bam&#39;, &#39;/opt/aligned/sample_05_accepted_hits.bam&#39;, &#39;/opt/aligned/sample_01_accepted_hits.bam&#39;, &#39;/opt/aligned/sample_06_accepted_hits.bam&#39;, &#39;/opt/aligned/sample_04_accepted_hits.bam&#39;, &#39;/opt/aligned/sample_08_accepted_hits.bam&#39;]</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="dekspresija.html#cb67-1"></a>counts <span class="op">=</span> []</span>
+<span id="cb67-2"><a href="dekspresija.html#cb67-2"></a>samples <span class="op">=</span> []</span>
+<span id="cb67-3"><a href="dekspresija.html#cb67-3"></a></span>
+<span id="cb67-4"><a href="dekspresija.html#cb67-4"></a><span class="cf">for</span> path <span class="kw">in</span> paths:</span>
+<span id="cb67-5"><a href="dekspresija.html#cb67-5"></a>    sname <span class="op">=</span> os.path.basename(path).replace(<span class="st">&#39;_accepted_hits.bam&#39;</span>, <span class="st">&#39;&#39;</span>)</span>
+<span id="cb67-6"><a href="dekspresija.html#cb67-6"></a>    bamfile <span class="op">=</span> pysam.AlignmentFile(path)</span>
+<span id="cb67-7"><a href="dekspresija.html#cb67-7"></a>    gene_counts<span class="op">=</span>{}</span>
+<span id="cb67-8"><a href="dekspresija.html#cb67-8"></a>    <span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;/opt/gencode.v27.chr20.bed&#39;</span>, <span class="st">&#39;r&#39;</span>) <span class="im">as</span> f:</span>
+<span id="cb67-9"><a href="dekspresija.html#cb67-9"></a>        <span class="cf">for</span> line <span class="kw">in</span> f:</span>
+<span id="cb67-10"><a href="dekspresija.html#cb67-10"></a>            tokens <span class="op">=</span> line.split(<span class="st">&#39;</span><span class="ch">\t</span><span class="st">&#39;</span>)</span>
+<span id="cb67-11"><a href="dekspresija.html#cb67-11"></a>            current_gene <span class="op">=</span> (tokens[<span class="dv">0</span>], <span class="bu">int</span>(tokens[<span class="dv">1</span>]), <span class="bu">int</span>(tokens[<span class="dv">2</span>]))</span>
+<span id="cb67-12"><a href="dekspresija.html#cb67-12"></a>            count <span class="op">=</span> read_count(current_gene, bamfile)</span>
+<span id="cb67-13"><a href="dekspresija.html#cb67-13"></a>            gene_counts.update({tokens[<span class="dv">3</span>].rstrip() : count})  </span>
+<span id="cb67-14"><a href="dekspresija.html#cb67-14"></a>    counts.append(gene_counts)</span>
+<span id="cb67-15"><a href="dekspresija.html#cb67-15"></a>    samples.append(sname)</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb68-1"><a href="dekspresija.html#cb68-1"></a>df <span class="op">=</span> pd.DataFrame.from_dict(counts)</span>
+<span id="cb68-2"><a href="dekspresija.html#cb68-2"></a>df.index <span class="op">=</span> samples</span>
+<span id="cb68-3"><a href="dekspresija.html#cb68-3"></a>df <span class="op">=</span> df.sort_index().T</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="dekspresija.html#cb69-1"></a>df.head(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##             sample_01  sample_02  sample_03  ...  sample_08  sample_09  sample_10
+## DEFB125          1016        465       1146  ...       1260        285        426
+## DEFB126           559        223        555  ...        749        132        240
+## DEFB127           419        145        527  ...        720        114        218
+## DEFB128           368        143        458  ...        457         87        138
+## DEFB129           395        188        573  ...        730        144        186
+## DEFB132          3381       1522       4193  ...       2012        516        711
+## AL034548.1       1218        572       1554  ...       3932        889       1037
+## C20orf96         1035        385       1384  ...       1815        295        403
+## ZCCHC3           2748       1150       2804  ...       3683        814       1023
+## NRSN2-AS1        4344       1921       5404  ...       5986       1337       1737
+## 
+## [10 rows x 10 columns]</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="dekspresija.html#cb71-1"></a>df.shape</span></code></pre></div>
+<pre><code>## (1357, 10)</code></pre>
+<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="dekspresija.html#cb73-1"></a>KiR <span class="op">=</span> np.exp((np.log(df)).mean(axis<span class="op">=</span><span class="dv">1</span>)) <span class="co">#geometric mean</span></span>
+<span id="cb73-2"><a href="dekspresija.html#cb73-2"></a>df <span class="op">=</span> df[(KiR <span class="op">!=</span> <span class="dv">0</span>).values]</span>
+<span id="cb73-3"><a href="dekspresija.html#cb73-3"></a>KiR <span class="op">=</span> KiR[(KiR <span class="op">!=</span> <span class="dv">0</span>).values]</span>
+<span id="cb73-4"><a href="dekspresija.html#cb73-4"></a>df.shape</span></code></pre></div>
+<pre><code>## (1347, 10)</code></pre>
+<div id="diferencijalna-eskpresija" class="section level2">
+<h2><span class="header-section-number">4.1</span> Diferencijalna Eskpresija</h2>
+<ul>
+<li>Gen ili transkript nazivamo diferencijalno ekspresovanim ako je uocena statisticki znacajna promena u ekspresiji izmedju neke dve grupe uzoraka koje posmatramo.</li>
+<li>Otkrivanje diferencijalno ekspresovanih gena je cesto cilj statisticke analize RNK sekvenciranih podataka.</li>
+</ul>
+</div>
+<div id="between-sample-normalization" class="section level2">
+<h2><span class="header-section-number">4.2</span> Between-sample normalization</h2>
+<ul>
+<li>The general point of between-sample normalization (BSN) is to be able to compare expression features (genes, transcripts) ACROSS experiments. This is not to be confused with <a href="https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/">within-sample normalization methods</a> (comparing different features within a single sample).</li>
+</ul>
+<p><img src="images/kogo-2013-rnaseq-analysis-79-638.jpg" width="600"></p>
+<ul>
+<li>Most BSN methods address two issues :
+<ul>
+<li>Variable sequencing depth (the total number of reads sequenced) between experiments.</li>
+<li>Finding a “control set” of expression features which should have relatively similar expression patterns across experiments (e.g. genes that are not differentially expressed) to serve as a baseline.</li>
+</ul></li>
+</ul>
+<p><img src="images/pie_charts.png" width="700">
+Harold Pimentel: <a href="https://haroldpimentel.wordpress.com/2014/12/08/in-rna-seq-2-2-between-sample-normalization/"><strong>In RNA-Seq, 2 != 2: Between-sample normalization</strong></a></p>
+<ul>
+<li>One way to do the total count normalization would be to divide by the total counts :</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Gene</th>
+<th>Control Counts</th>
+<th>Treatment Counts</th>
+<th>Control Normalized</th>
+<th>Treatment Normalized</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>G1</td>
+<td>2.00</td>
+<td>6.00</td>
+<td>0.20</td>
+<td>0.06</td>
+</tr>
+<tr class="even">
+<td>G2</td>
+<td>2.00</td>
+<td>6.00</td>
+<td>0.20</td>
+<td>0.06</td>
+</tr>
+<tr class="odd">
+<td>G3</td>
+<td>2.00</td>
+<td>6.00</td>
+<td>0.20</td>
+<td>0.06</td>
+</tr>
+<tr class="even">
+<td>G4</td>
+<td>2.00</td>
+<td>6.00</td>
+<td>0.20</td>
+<td>0.06</td>
+</tr>
+<tr class="odd">
+<td>FG</td>
+<td>2.00</td>
+<td>76.00</td>
+<td>0.20</td>
+<td>0.76</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>If one compares the control and treatment proportions, it seems that every gene is differentially expressed. We are typically under the assumption that the majority of the genes do not change in expression. Under that assumption, it is much more plausible that genes one through four remain equally expressed, whereas “funky gene” (FG) is the only differentially expressed gene.</p></li>
+<li><p>We might consider normalizing by the sum of the total counts while omitting the last gene since its highly overexpressed and is throwing off the normalization :</p></li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Gene</th>
+<th>Control Counts</th>
+<th>Treatment Counts</th>
+<th>Control Normalized</th>
+<th>Treatment Normalized</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>G1</td>
+<td>2.00</td>
+<td>6.00</td>
+<td>0.25</td>
+<td>0.25</td>
+</tr>
+<tr class="even">
+<td>G2</td>
+<td>2.00</td>
+<td>6.00</td>
+<td>0.25</td>
+<td>0.25</td>
+</tr>
+<tr class="odd">
+<td>G3</td>
+<td>2.00</td>
+<td>6.00</td>
+<td>0.25</td>
+<td>0.25</td>
+</tr>
+<tr class="even">
+<td>G4</td>
+<td>2.00</td>
+<td>6.00</td>
+<td>0.25</td>
+<td>0.25</td>
+</tr>
+<tr class="odd">
+<td>FG</td>
+<td>2.00</td>
+<td>76.00</td>
+<td>0.25</td>
+<td>3.17</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>Between sample normalization procedures estimate <strong>sample-specific normalization factors</strong> that are used to rescale the observed counts.</p></li>
+<li><p>Using these normalization methods, the sum of the normalized counts across all genes are therefore not necessarily equal between samples (as it would be if only the library sizes were used for normalization), but the goal is instead to make the normalized counts for non-differentially expressed genes similar between the samples.</p></li>
+<li><p>Popular examples of these normalization procedures are <strong>TMM</strong> (trimmed mean of M-values) and <strong>DESeq</strong>. These two methods perform similarly and are both based on an assumption that most genes are equivalently expressed in the samples, and that the differentially expressed genes are divided more or less equally between up- and downregulation.</p></li>
+<li><p>With <strong>DESeq</strong> sample-specific normalization constants are estimated with the median-of-ratios method:</p></li>
+</ul>
+<p><img src="images/form1.png" width="200"><img src="images/form2.png" width="200"></p>
+<ul>
+<li>Let’s try estimating sample specific normalization factor for the two dummy samples from the example. We first calculate the geometric means for each gene:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Gene</th>
+<th>Control Counts</th>
+<th>Treatment Counts</th>
+<th>KiR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>G1</td>
+<td>2.00</td>
+<td>6.00</td>
+<td>3.464</td>
+</tr>
+<tr class="even">
+<td>G2</td>
+<td>2.00</td>
+<td>6.00</td>
+<td>3.464</td>
+</tr>
+<tr class="odd">
+<td>G3</td>
+<td>2.00</td>
+<td>6.00</td>
+<td>3.464</td>
+</tr>
+<tr class="even">
+<td>G4</td>
+<td>2.00</td>
+<td>6.00</td>
+<td>3.464</td>
+</tr>
+<tr class="odd">
+<td>FG</td>
+<td>2.00</td>
+<td>76.00</td>
+<td>12.329</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Next we divide each count with the geometric mean expression for that gene:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Gene</th>
+<th>Control Counts/KiR</th>
+<th>Treatment Counts/KiR</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>G1</td>
+<td>0.57735</td>
+<td>1.73205</td>
+</tr>
+<tr class="even">
+<td>G2</td>
+<td>0.57735</td>
+<td>1.73205</td>
+</tr>
+<tr class="odd">
+<td>G3</td>
+<td>0.57735</td>
+<td>1.73205</td>
+</tr>
+<tr class="even">
+<td>G4</td>
+<td>0.57735</td>
+<td>1.73205</td>
+</tr>
+<tr class="odd">
+<td>FG</td>
+<td>0.16222</td>
+<td>6.16441</td>
+</tr>
+</tbody>
+</table>
+<p><br>
+- It is obvious that sample specific normalization factors are 0.57735 and 1.73205 (sample medians).</p>
+<ul>
+<li>Finally we divide each sample by its normalization factor:</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Gene</th>
+<th>Control Normalized</th>
+<th>Treatment Normalized</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>G1</td>
+<td>3.4641</td>
+<td>3.4641</td>
+</tr>
+<tr class="even">
+<td>G2</td>
+<td>3.4641</td>
+<td>3.4641</td>
+</tr>
+<tr class="odd">
+<td>G3</td>
+<td>3.4641</td>
+<td>3.4641</td>
+</tr>
+<tr class="even">
+<td>G4</td>
+<td>3.4641</td>
+<td>3.4641</td>
+</tr>
+<tr class="odd">
+<td>FG</td>
+<td>3.4641</td>
+<td>43.87864</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="dekspresija.html#cb75-1"></a>aux <span class="op">=</span> df.divide(KiR.values, axis <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb75-2"><a href="dekspresija.html#cb75-2"></a>aux.head(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##             sample_01  sample_02  sample_03  ...  sample_08  sample_09  sample_10
+## DEFB125      1.351510   0.618555   1.524440  ...   1.676086   0.379115   0.566677
+## DEFB126      1.411339   0.563021   1.401240  ...   1.891043   0.333268   0.605942
+## DEFB127      1.268995   0.439151   1.596087  ...   2.180612   0.345264   0.660241
+## DEFB128      1.450690   0.563719   1.805478  ...   1.801536   0.342962   0.544009
+## DEFB129      1.049116   0.499326   1.521882  ...   1.938873   0.382463   0.494014
+## DEFB132      1.840957   0.828730   2.283092  ...   1.095536   0.280962   0.387140
+## AL034548.1   0.854659   0.401367   1.090427  ...   2.759048   0.623803   0.727653
+## C20orf96     1.276008   0.474650   1.706276  ...   2.237638   0.363693   0.496842
+## ZCCHC3       1.376184   0.575914   1.404228  ...   1.844427   0.407647   0.512313
+## NRSN2-AS1    1.335328   0.590508   1.661168  ...   1.840072   0.410988   0.533947
+## 
+## [10 rows x 10 columns]</code></pre>
+<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="dekspresija.html#cb77-1"></a>sizeF <span class="op">=</span> aux.median(axis <span class="op">=</span> <span class="dv">0</span>).values</span>
+<span id="cb77-2"><a href="dekspresija.html#cb77-2"></a>normdf <span class="op">=</span> df.divide(sizeF, axis <span class="op">=</span> <span class="dv">1</span>)</span></code></pre></div>
+<p>Normalized, this is how our simulated dataset looks like:</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb78-1"><a href="dekspresija.html#cb78-1"></a>normdf.head(<span class="dv">10</span>)</span></code></pre></div>
+<pre><code>##               sample_01    sample_02  ...    sample_09    sample_10
+## DEFB125      799.307029   844.137999  ...   708.873105   816.735707
+## DEFB126      439.776210   404.823169  ...   328.320175   460.132793
+## DEFB127      329.635478   263.225828  ...   283.549242   417.953953
+## DEFB128      289.512782   259.595127  ...   216.392842   264.576356
+## DEFB129      310.754209   341.285901  ...   358.167463   356.602914
+## DEFB132     2659.898687  2762.963514  ...  1283.433410  1363.143399
+## AL034548.1   958.224372  1038.380506  ...  2211.186631  1988.157109
+## C20orf96     814.254700   698.909956  ...   733.745845   772.639648
+## ZCCHC3      2161.905233  2087.653115  ...  2024.641077  1961.316029
+## NRSN2-AS1   3417.509582  3487.288378  ...  3325.485406  3330.211088
+## 
+## [10 rows x 10 columns]</code></pre>
+</div>
+<div id="exploratory-analysis" class="section level2">
+<h2><span class="header-section-number">4.3</span> Exploratory analysis</h2>
+<p>Data quality assessment and quality control (i.e. the removal of insufficiently good data) are essential steps of any data analysis. These steps should typically be performed very early in the analysis of a new data set, preceding or in parallel to the differential expression testing.</p>
+<p>The dataset we are investigating is simulated, but let us pretend that samples 6 through 10 are coming from the “treated” population and that samples 1 through 5 are “untreated” or “control” samples.</p>
+<p>A useful initial step in an RNA-seq analysis is often to assess overall similarity between samples:</p>
+<ul>
+<li>Which samples are similar to each other, which are different?</li>
+<li>Does this fit to the expectation from the experiment’s design?</li>
+<li>What are the major sources of variation in the dataset?</li>
+</ul>
+<p>To explore the similarity of our samples, we will be performing sample-level QC using Principal Component Analysis (PCA) and hierarchical clustering methods. Our sample-level QC allows us to see how well our replicates cluster together, as well as, observe whether our experimental condition represents the major source of variation in the data. Performing sample-level QC can also identify any sample outliers, which may need to be explored further to determine whether they need to be removed prior to DE analysis.</p>
+<br>
+<center>
+<iframe width="560" height="315" align="middle" src="https://www.youtube.com/embed/_UVHneBUBW0" frameborder="0" allowfullscreen>
+</iframe>
+</center>
+<p><br></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb80-1"><a href="dekspresija.html#cb80-1"></a><span class="im">from</span> sklearn.decomposition <span class="im">import</span> PCA</span>
+<span id="cb80-2"><a href="dekspresija.html#cb80-2"></a></span>
+<span id="cb80-3"><a href="dekspresija.html#cb80-3"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb80-4"><a href="dekspresija.html#cb80-4"></a></span>
+<span id="cb80-5"><a href="dekspresija.html#cb80-5"></a>principalComponents <span class="op">=</span> pca.fit_transform(normdf.T)</span>
+<span id="cb80-6"><a href="dekspresija.html#cb80-6"></a></span>
+<span id="cb80-7"><a href="dekspresija.html#cb80-7"></a>principalDf <span class="op">=</span> pd.DataFrame(data <span class="op">=</span> principalComponents</span>
+<span id="cb80-8"><a href="dekspresija.html#cb80-8"></a>             , columns <span class="op">=</span> [<span class="st">&#39;principal component 1&#39;</span>, <span class="st">&#39;principal component 2&#39;</span>])</span>
+<span id="cb80-9"><a href="dekspresija.html#cb80-9"></a></span>
+<span id="cb80-10"><a href="dekspresija.html#cb80-10"></a>categories <span class="op">=</span> np.array([<span class="st">&quot;untreated&quot;</span>, <span class="st">&quot;treated&quot;</span>])</span>
+<span id="cb80-11"><a href="dekspresija.html#cb80-11"></a></span>
+<span id="cb80-12"><a href="dekspresija.html#cb80-12"></a>finalDf <span class="op">=</span> pd.concat([principalDf, pd.DataFrame(np.repeat(categories, [<span class="dv">5</span>, <span class="dv">5</span>], axis<span class="op">=</span><span class="dv">0</span>), columns<span class="op">=</span>[<span class="st">&#39;condition&#39;</span>])], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb80-13"><a href="dekspresija.html#cb80-13"></a>finalDf</span></code></pre></div>
+<pre><code>##    principal component 1  principal component 2  condition
+## 0            7253.669019           -1133.085852  untreated
+## 1            6777.834829            -351.825929  untreated
+## 2            6777.584161            1550.295036  untreated
+## 3            6891.705861            -334.630787  untreated
+## 4            7100.443338             351.964060  untreated
+## 5           -7020.208240            2833.669670    treated
+## 6           -7027.034271           -2662.133319    treated
+## 7           -7052.228614             957.489013    treated
+## 8           -6578.866744           -1450.586265    treated
+## 9           -7122.899341             238.844374    treated</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="dekspresija.html#cb82-1"></a>pcaDF &lt;-<span class="st"> </span>reticulate<span class="op">::</span>py<span class="op">$</span>finalDf</span>
+<span id="cb82-2"><a href="dekspresija.html#cb82-2"></a>pcaDF</span></code></pre></div>
+<pre><code>##    principal component 1 principal component 2 condition
+## 1               7253.669            -1133.0859 untreated
+## 2               6777.835             -351.8259 untreated
+## 3               6777.584             1550.2950 untreated
+## 4               6891.706             -334.6308 untreated
+## 5               7100.443              351.9641 untreated
+## 6              -7020.208             2833.6697   treated
+## 7              -7027.034            -2662.1333   treated
+## 8              -7052.229              957.4890   treated
+## 9              -6578.867            -1450.5863   treated
+## 10             -7122.899              238.8444   treated</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="dekspresija.html#cb84-1"></a><span class="kw">ggplot</span>(pcaDF, <span class="kw">aes</span>(<span class="dt">x=</span><span class="st">`</span><span class="dt">principal component 1</span><span class="st">`</span>, <span class="dt">y=</span><span class="st">`</span><span class="dt">principal component 2</span><span class="st">`</span>, <span class="dt">color =</span> condition)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb84-2"><a href="dekspresija.html#cb84-2"></a><span class="st">  </span><span class="kw">geom_point</span>()</span></code></pre></div>
+<p><img src="RNA-Seq_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="images/gpca1.png" width="600"></p>
+<p><img src="images/gpca2.png" width="600"></p>
+<p><img src="images/gpca3.png" width="600"></p>
+<p><img src="images/cldendrogram.png" width="600"></p>
+</div>
+<div id="intro-to-statistical-inference" class="section level2">
+<h2><span class="header-section-number">4.4</span> Intro to statistical inference</h2>
+<p>For each gene, we are interested in differences in mean expression between the two sample groups.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb85-1"><a href="dekspresija.html#cb85-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb85-2"><a href="dekspresija.html#cb85-2"></a></span>
+<span id="cb85-3"><a href="dekspresija.html#cb85-3"></a>aux <span class="op">=</span> {<span class="st">&quot;norm&quot;</span> : normdf.loc[<span class="st">&#39;AL031055.1&#39;</span>], <span class="st">&quot;group&quot;</span> : np.repeat(categories, [<span class="dv">5</span>, <span class="dv">5</span>], axis<span class="op">=</span><span class="dv">0</span>)}</span>
+<span id="cb85-4"><a href="dekspresija.html#cb85-4"></a>df <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>aux)</span>
+<span id="cb85-5"><a href="dekspresija.html#cb85-5"></a>sns.stripplot(x<span class="op">=</span><span class="st">&quot;group&quot;</span>, y<span class="op">=</span><span class="st">&quot;norm&quot;</span>, data<span class="op">=</span>df, jitter<span class="op">=</span><span class="va">True</span>).set_title(<span class="st">&#39;AL031055.1&#39;</span>)</span></code></pre></div>
+<p><img src="RNA-Seq_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb86-1"><a href="dekspresija.html#cb86-1"></a>aux <span class="op">=</span> {<span class="st">&quot;norm&quot;</span> : normdf.loc[<span class="st">&#39;AL023803.2&#39;</span>], <span class="st">&quot;group&quot;</span> : np.repeat(categories, [<span class="dv">5</span>, <span class="dv">5</span>], axis<span class="op">=</span><span class="dv">0</span>)}</span>
+<span id="cb86-2"><a href="dekspresija.html#cb86-2"></a>df <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>aux)</span>
+<span id="cb86-3"><a href="dekspresija.html#cb86-3"></a>sns.stripplot(x<span class="op">=</span><span class="st">&quot;group&quot;</span>, y<span class="op">=</span><span class="st">&quot;norm&quot;</span>, data<span class="op">=</span>df, jitter<span class="op">=</span><span class="va">True</span>).set_title(<span class="st">&#39;AL023803.2&#39;</span>)</span></code></pre></div>
+<p><img src="RNA-Seq_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb87-1"><a href="dekspresija.html#cb87-1"></a>sns.boxplot(x<span class="op">=</span><span class="st">&quot;group&quot;</span>, y<span class="op">=</span><span class="st">&quot;norm&quot;</span>, data<span class="op">=</span>df).set_title(<span class="st">&#39;AL023803.2&#39;</span>)</span></code></pre></div>
+<p><img src="RNA-Seq_files/figure-html/unnamed-chunk-3-5.png" width="672" /></p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb88-1"><a href="dekspresija.html#cb88-1"></a>cMean <span class="op">=</span> normdf.loc[<span class="st">&#39;AL023803.2&#39;</span>][<span class="dv">0</span>:<span class="dv">5</span>].mean()</span>
+<span id="cb88-2"><a href="dekspresija.html#cb88-2"></a>tMean <span class="op">=</span> normdf.loc[<span class="st">&#39;AL023803.2&#39;</span>][<span class="dv">5</span>:<span class="dv">10</span>].mean()</span>
+<span id="cb88-3"><a href="dekspresija.html#cb88-3"></a><span class="bu">print</span>(cMean)</span></code></pre></div>
+<pre><code>## 354.8722544056803</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb90-1"><a href="dekspresija.html#cb90-1"></a><span class="bu">print</span>(tMean)</span></code></pre></div>
+<pre><code>## 402.20746388364734</code></pre>
+<div class="sourceCode" id="cb92"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb92-1"><a href="dekspresija.html#cb92-1"></a>diff <span class="op">=</span> tMean <span class="op">-</span> cMean</span>
+<span id="cb92-2"><a href="dekspresija.html#cb92-2"></a>diff</span></code></pre></div>
+<pre><code>## 47.335209477967055</code></pre>
+<p>So the expression level for AL023803.2 in treated samples is about 10% higher. But these averages are <strong>random variables</strong>. They can take many values.</p>
+<p>If we repeat the experiment, by sequencing samples from a new batch of patients (or even resequencing the same ones) we get different means. Every time we repeat this experiment, we get a different value of mean difference.</p>
+<p>When comparing measured values we need to be skeptical. How do we know that this difference is due to the treatment? What happens if compare two sets of untreated samples? Will we see a difference this big? Statisticians refer to this scenario as the <strong>null hypothesis</strong>. The name “null” is used to remind us that we are acting as skeptics: we give credence to the possibility that there is no difference.</p>
+<p>So what do we do?</p>
+<p>Because we do not have access to entire populations of untreated and treated samples, we cannot confidently say just by comparing the mean expression values that a gene is differentialy expressed.</p>
+<p>We can perform a simple <strong>permutation test</strong>. Permutation tests take advantage of the fact that if we randomly shuffle the treated and untreated labels for the 10 measurements that we have - then the null is true. So we shuffle the labels, calculate the mean difference and assume that the ensuing distribution approximates the null distribution. Here is how we generate a null distribution by shuffling the data 1,000 times:</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb94-1"><a href="dekspresija.html#cb94-1"></a>normexp <span class="op">=</span> normdf.loc[<span class="st">&#39;AL023803.2&#39;</span>]</span>
+<span id="cb94-2"><a href="dekspresija.html#cb94-2"></a></span>
+<span id="cb94-3"><a href="dekspresija.html#cb94-3"></a>np.random.seed(<span class="dv">6</span>)</span>
+<span id="cb94-4"><a href="dekspresija.html#cb94-4"></a>means <span class="op">=</span>[]</span>
+<span id="cb94-5"><a href="dekspresija.html#cb94-5"></a></span>
+<span id="cb94-6"><a href="dekspresija.html#cb94-6"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1000</span>) :</span>
+<span id="cb94-7"><a href="dekspresija.html#cb94-7"></a>    aux <span class="op">=</span> np.random.permutation(normexp)</span>
+<span id="cb94-8"><a href="dekspresija.html#cb94-8"></a>    cmean <span class="op">=</span> aux[<span class="dv">0</span>:<span class="dv">5</span>].mean()</span>
+<span id="cb94-9"><a href="dekspresija.html#cb94-9"></a>    tmean <span class="op">=</span> aux[<span class="dv">5</span>:<span class="dv">10</span>].mean()</span>
+<span id="cb94-10"><a href="dekspresija.html#cb94-10"></a>    means.append(tmean<span class="op">-</span>cmean)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="dekspresija.html#cb95-1"></a>betaHat &lt;-<span class="st"> </span>reticulate<span class="op">::</span>py<span class="op">$</span>diff</span>
+<span id="cb95-2"><a href="dekspresija.html#cb95-2"></a>b1 &lt;-<span class="st"> </span><span class="kw">unlist</span>(reticulate<span class="op">::</span>py<span class="op">$</span>means)</span>
+<span id="cb95-3"><a href="dekspresija.html#cb95-3"></a></span>
+<span id="cb95-4"><a href="dekspresija.html#cb95-4"></a><span class="kw">hist</span>(b1, <span class="dt">breaks =</span> <span class="dv">50</span>)</span>
+<span id="cb95-5"><a href="dekspresija.html#cb95-5"></a><span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">c</span>(betaHat, <span class="op">-</span>betaHat), <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</span></code></pre></div>
+<p><img src="RNA-Seq_files/figure-html/unnamed-chunk-55-7.png" width="672" /></p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="dekspresija.html#cb96-1"></a><span class="co"># sum(abs(b1) &gt; abs(betaHat))/length(b1)</span></span></code></pre></div>
+<div class="sourceCode" id="cb97"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb97-1"><a href="dekspresija.html#cb97-1"></a>absmeans <span class="op">=</span> [<span class="bu">abs</span>(x) <span class="cf">for</span> x <span class="kw">in</span> means]</span>
+<span id="cb97-2"><a href="dekspresija.html#cb97-2"></a>absdiff <span class="op">=</span> <span class="bu">abs</span>(diff)</span>
+<span id="cb97-3"><a href="dekspresija.html#cb97-3"></a></span>
+<span id="cb97-4"><a href="dekspresija.html#cb97-4"></a>p <span class="op">=</span> <span class="bu">sum</span>(absmeans <span class="op">&gt;</span> absdiff)<span class="op">/</span><span class="bu">len</span>(absmeans)</span>
+<span id="cb97-5"><a href="dekspresija.html#cb97-5"></a>p</span></code></pre></div>
+<pre><code>## 0.135</code></pre>
+<ul>
+<li><strong>Null hypothesis</strong>: there is no significant difference between specified populations, any observed difference being due to sampling or experimental error.</li>
+<li>The <strong>p-value</strong> is defined as the probability of obtaining a result equal to or “more extreme” than what was actually observed, when the null hypothesis is true.</li>
+<li>The <strong>alternative hypothesis</strong> is considered true if the statistic observed would be an unlikely realization of the null hypothesis according to the p-value.</li>
+</ul>
+</div>
+<div id="central-limit-theorem" class="section level2">
+<h2><span class="header-section-number">4.5</span> Central Limit Theorem</h2>
+<p>CLT: <strong>When the sample size is large</strong>, the average <span class="math inline">\(\bar{Y}\)</span> of a random sample follows a normal distribution centered at the population average <span class="math inline">\(\mu_{Y}\)</span> and with standard deviation equal to the population standard deviation <span class="math inline">\(\sigma_{Y}\)</span>, divided by the square root of the sample size <span class="math inline">\(N\)</span>.</p>
+<p>We refer to the standard deviation of the distribution of a random variable as the random variable’s standard error.</p>
+<p><a href="https://rajeshrinet.github.io/blog/2014/central-limit-theorem/" class="uri">https://rajeshrinet.github.io/blog/2014/central-limit-theorem/</a></p>
+<p><strong>Population</strong> mean and variance (deviation squred) are parameters defined as:</p>
+<p><span class="math display">\[\mu_{Y} = \frac{1}{n}\sum_{i=1}^{n}y_{i}\]</span>
+<span class="math display">\[\sigma_{Y}^2 = \frac{1}{n}\sum_{i=1}^{n}(y_{i}-\mu_{Y})^{2}\]</span></p>
+<p>where <span class="math inline">\(n\)</span> is the number of elements in population.</p>
+<p>Normal distribution <span class="math inline">\(N(\mu, \sigma)\)</span> is defined with the density function:</p>
+<p><span class="math display">\[f(x)=\frac{1}{\sqrt{2\pi\sigma^{2}}}e^{-\frac{\left (x-\mu_{X}  \right )^{2}}{2\sigma^{2}}}\]</span></p>
+<p><img src="images/normal.png" width="550"></p>
+<p>If we subtract a constant from a random variable, the mean of the new random variable shifts by that constant. Mathematically, if <span class="math inline">\(X\)</span> is a random variable with mean <span class="math inline">\(\mu\)</span> and <span class="math inline">\(a\)</span> is a constant, the mean of <span class="math inline">\(X − a\)</span> is <span class="math inline">\(\mu − a\)</span>. A similarly intuitive result holds for multiplication and the standard deviation (SD). If <span class="math inline">\(X\)</span> is a random variable with mean <span class="math inline">\(\mu\)</span> and SD <span class="math inline">\(\sigma\)</span>, and <span class="math inline">\(a\)</span> is a constant, then the mean and SD of <span class="math inline">\(aX\)</span> are <span class="math inline">\(a\mu\)</span> and <span class="math inline">\(| a | \sigma\)</span> respectively.</p>
+<p>Knowing this, the CLT implies that if we take many samples of size <span class="math inline">\(N\)</span>, then the quantity:</p>
+<p><span class="math display">\[\frac{\bar{Y}-\mu_{Y}}{\sigma_{Y}/\sqrt{N}}\]</span></p>
+<p>is approximated with a normal distribution centered at 0 and with standard deviation 1.</p>
+<p>If <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are two random variables independent of each other, then the variance of <span class="math inline">\(X + Y\)</span> is the sum of the
+variances <span class="math inline">\(\sigma_{X}^{2} + \sigma_{Y}^{2}\)</span>. The sum (or the difference) of normal variables is again normal. <strong>Under the null hypothesis</strong> (when the mean difference is 0), the ratio:</p>
+<p><span class="math display">\[\frac{\bar{Y}-\bar{X}}{\sqrt{\frac{\sigma_{Y}^{2}}{N}+\frac{\sigma_{X}^{2}}{M}}}\]</span></p>
+<p>is approximated by a normal distribution centered at 0 and standard deviation 1. Using this approximation makes computing p-values simple because we know the proportion of the distribution under any value. For example, only 5% of these values are larger than 2 (in absolute value).</p>
+<p>However, we can’t claim victory just yet because we don’t know the population standard deviations: <span class="math inline">\(\sigma_{X}\)</span> and <span class="math inline">\(\sigma_{Y}\)</span>. These are unknown population parameters, but we can get around this by using the sample standard deviations, call them <span class="math inline">\(s_{X}\)</span> and <span class="math inline">\(s_{Y}\)</span>. These are defined as:</p>
+<p><span class="math display">\[s_{X}^2 = \frac{1}{M-1}\sum_{i=1}^{M}(X_{i}-\bar{X})^{2}\]</span>
+<span class="math display">\[s_{Y}^2 = \frac{1}{N-1}\sum_{i=1}^{N}(Y_{i}-\bar{Y})^{2}\]</span></p>
+<p><span class="math inline">\(M − 1\)</span>, <span class="math inline">\(N − 1\)</span>: the degrees of freedom.</p>
+<p>So we can redefine our ratio as:</p>
+<p><span class="math display">\[\frac{\bar{Y}-\bar{X}}{\sqrt{\frac{s_{Y}^{2}}{N}+\frac{s_{X}^{2}}{M}}}\]</span></p>
+<p>The CLT tells us that when <span class="math inline">\(M\)</span> and <span class="math inline">\(N\)</span> are large, this random variable is normally distributed with mean 0 and SD 1.</p>
+</div>
+<div id="the-t-distribution" class="section level2">
+<h2><span class="header-section-number">4.6</span> The t-distribution</h2>
+<p>The CLT relies on large samples, what we refer to as <em>asymptotic</em> results. When the CLT does not apply, there is another option that does not rely on asymptotic results. When the original population from which a random variable, say <span class="math inline">\(Y\)</span>, is sampled is normally distributed with mean 0, then we can calculate the distribution of:</p>
+<p><span class="math display">\[\sqrt{N}\frac{\bar{Y}-0}{\sigma_{Y}}\]</span></p>
+<p>This is the ratio of two random variables so it is not necessarily normal. The fact that the denominator can be small by chance increases the probability of observing large values. In 1908. William Sealy Gosset, an employee of the Guinness brewing company, deciphered the distribution of this random variable and published a paper under the pseudonym “Student”. The distribution is therefore called Student’s t-distribution.</p>
+<p><span class="math display">\[f(t)=\frac{\Gamma(\frac{\nu+1}{2})}{\sqrt{\nu\pi}\Gamma(\frac{\nu}{2})}\left (1+\frac{t^2}{\nu} \right )^{-\frac{\nu+1}{2}}\]</span></p>
+<p>where <span class="math inline">\(\nu\)</span> is the degrees of freedom.</p>
+<p><img src="images/image_11071.jpg" width="450"></p>
+<p>So for small sample sizes we shall be computing that same ratio:</p>
+<p><span class="math display">\[\frac{\bar{Y}-\bar{X}}{\sqrt{\frac{s_{Y}^{2}}{N}+\frac{s_{X}^{2}}{M}}}\]</span></p>
+<p>only this time we shall be comparing it to the t-distribution instead of normal. All such tests are usually called Student’s t-tests, though strictly speaking that name should only be used if the variances of the two populations are also assumed to be equal; the form of the test used when this assumption is dropped is sometimes called Welch’s t-test and that’s the one that we’ll be implementing.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb99-1"><a href="dekspresija.html#cb99-1"></a><span class="kw">def</span> welch_test(a, b):</span>
+<span id="cb99-2"><a href="dekspresija.html#cb99-2"></a>    </span>
+<span id="cb99-3"><a href="dekspresija.html#cb99-3"></a>    <span class="co"># pandas.Series.var() returns an unbiased variance estimate, normalized by N-1 by default</span></span>
+<span id="cb99-4"><a href="dekspresija.html#cb99-4"></a>    var_a <span class="op">=</span> a.var()</span>
+<span id="cb99-5"><a href="dekspresija.html#cb99-5"></a>    var_b <span class="op">=</span> b.var()</span>
+<span id="cb99-6"><a href="dekspresija.html#cb99-6"></a>    </span>
+<span id="cb99-7"><a href="dekspresija.html#cb99-7"></a>    Na <span class="op">=</span> <span class="bu">len</span>(a)</span>
+<span id="cb99-8"><a href="dekspresija.html#cb99-8"></a>    Nb <span class="op">=</span> <span class="bu">len</span>(b)</span>
+<span id="cb99-9"><a href="dekspresija.html#cb99-9"></a></span>
+<span id="cb99-10"><a href="dekspresija.html#cb99-10"></a>    <span class="co"># std deviation estimate</span></span>
+<span id="cb99-11"><a href="dekspresija.html#cb99-11"></a>    s <span class="op">=</span> np.sqrt(var_a<span class="op">/</span>Na <span class="op">+</span> var_b<span class="op">/</span>Nb)</span>
+<span id="cb99-12"><a href="dekspresija.html#cb99-12"></a></span>
+<span id="cb99-13"><a href="dekspresija.html#cb99-13"></a>    <span class="co"># calculate the t-statistics</span></span>
+<span id="cb99-14"><a href="dekspresija.html#cb99-14"></a>    t <span class="op">=</span> (a.mean() <span class="op">-</span> b.mean())<span class="op">/</span>s</span>
+<span id="cb99-15"><a href="dekspresija.html#cb99-15"></a></span>
+<span id="cb99-16"><a href="dekspresija.html#cb99-16"></a>    <span class="co"># degrees of freedom - Welch–Satterthwaite equation, yeah it&#39;s a bit more complicated than Na + Nb - 2</span></span>
+<span id="cb99-17"><a href="dekspresija.html#cb99-17"></a>    deg <span class="op">=</span> (((var_a)<span class="op">/</span>Na <span class="op">+</span> (var_b)<span class="op">/</span>Nb)<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span> ((var_a<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span>(Na<span class="op">**</span><span class="dv">2</span><span class="op">*</span>(Na<span class="dv">-1</span>)) <span class="op">+</span> (var_b<span class="op">**</span><span class="dv">2</span>)<span class="op">/</span>(Nb<span class="op">**</span><span class="dv">2</span><span class="op">*</span>(Nb<span class="dv">-1</span>)))</span>
+<span id="cb99-18"><a href="dekspresija.html#cb99-18"></a></span>
+<span id="cb99-19"><a href="dekspresija.html#cb99-19"></a>    <span class="co"># p-value after comparison with the t     </span></span>
+<span id="cb99-20"><a href="dekspresija.html#cb99-20"></a>    p <span class="op">=</span> <span class="dv">2</span><span class="op">*</span>stats.t.sf(np.<span class="bu">abs</span>(t), deg)</span>
+<span id="cb99-21"><a href="dekspresija.html#cb99-21"></a>    <span class="cf">return</span> (p)</span>
+<span id="cb99-22"><a href="dekspresija.html#cb99-22"></a>    </span>
+<span id="cb99-23"><a href="dekspresija.html#cb99-23"></a>p <span class="op">=</span> [(index, welch_test(row.values[<span class="dv">0</span>:<span class="dv">5</span>], row.values[<span class="dv">5</span>:<span class="dv">10</span>])) <span class="cf">for</span> index, row <span class="kw">in</span> normdf.iterrows()]</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb100-1"><a href="dekspresija.html#cb100-1"></a>res <span class="op">=</span> pd.DataFrame(p, columns<span class="op">=</span>[<span class="st">&#39;gene&#39;</span>, <span class="st">&#39;pval&#39;</span>])</span>
+<span id="cb100-2"><a href="dekspresija.html#cb100-2"></a>res <span class="op">=</span> res.set_index(<span class="st">&#39;gene&#39;</span>)</span>
+<span id="cb100-3"><a href="dekspresija.html#cb100-3"></a>res.shape</span></code></pre></div>
+<pre><code>## (1347, 1)</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb102-1"><a href="dekspresija.html#cb102-1"></a>res.head(<span class="dv">6</span>)</span></code></pre></div>
+<pre><code>##                  pval
+## gene                 
+## DEFB125  6.449128e-01
+## DEFB126  3.094837e-01
+## DEFB127  5.164307e-01
+## DEFB128  3.106288e-03
+## DEFB129  5.639828e-01
+## DEFB132  6.687543e-07</code></pre>
+</div>
+<div id="multiple-testing" class="section level2">
+<h2><span class="header-section-number">4.7</span> Multiple testing</h2>
+<ul>
+<li>In genomic studies you don’t usually fit just one regression model or calculate just one p-value. You calculate many p-values.</li>
+<li>In our simulated dataset, just from chromosome 20 (which is one of the shortest in human genome) we have 1347 genes.</li>
+<li>If you use the standard cutoff of 0.05 when calling p-value significant, you’ll know that since p-values are uniformly distributed when the null is true, about 1 out of every 20 times you’ll still call that result statistically significant, even when there is no true biological effect.</li>
+</ul>
+<div class="sourceCode" id="cb104"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb104-1"><a href="dekspresija.html#cb104-1"></a>np.random.seed(<span class="dv">6</span>)</span>
+<span id="cb104-2"><a href="dekspresija.html#cb104-2"></a>pvals <span class="op">=</span>[]</span>
+<span id="cb104-3"><a href="dekspresija.html#cb104-3"></a></span>
+<span id="cb104-4"><a href="dekspresija.html#cb104-4"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">20000</span>) :</span>
+<span id="cb104-5"><a href="dekspresija.html#cb104-5"></a>    firstg <span class="op">=</span> np.random.normal(<span class="dv">32</span>, <span class="dv">5</span>, <span class="dv">20</span>)</span>
+<span id="cb104-6"><a href="dekspresija.html#cb104-6"></a>    secondg <span class="op">=</span> np.random.normal(<span class="dv">32</span>, <span class="dv">5</span>, <span class="dv">20</span>)</span>
+<span id="cb104-7"><a href="dekspresija.html#cb104-7"></a>    pval <span class="op">=</span> welch_test(firstg, secondg)</span>
+<span id="cb104-8"><a href="dekspresija.html#cb104-8"></a>    pvals.append(pval)</span></code></pre></div>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="dekspresija.html#cb105-1"></a>pvals &lt;-<span class="st"> </span><span class="kw">unlist</span>(reticulate<span class="op">::</span>py<span class="op">$</span>pvals)</span>
+<span id="cb105-2"><a href="dekspresija.html#cb105-2"></a><span class="kw">hist</span>(pvals, <span class="dt">breaks =</span> <span class="dv">20</span>)</span></code></pre></div>
+<p><img src="RNA-Seq_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p><img src="images/significant1.png" width="700"></p>
+<p><img src="images/significant2.png" width="700"></p>
+<p><img src="images/significant3.png" width="700"></p>
+<p><img src="images/significant4.png" width="700"></p>
+<div class="sourceCode" id="cb106"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb106-1"><a href="dekspresija.html#cb106-1"></a>res[<span class="st">&#39;pval&#39;</span>].plot.hist(bins<span class="op">=</span><span class="dv">20</span>)</span></code></pre></div>
+<p><img src="RNA-Seq_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Called significant</th>
+<th>Not called significant</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Null true</td>
+<td><span class="math inline">\(V\)</span></td>
+<td><span class="math inline">\(n_{0} - V\)</span></td>
+<td><span class="math inline">\(n_{0}\)</span></td>
+</tr>
+<tr class="even">
+<td>Alternative true</td>
+<td><span class="math inline">\(S\)</span></td>
+<td><span class="math inline">\(n_{1} - S\)</span></td>
+<td><span class="math inline">\(n_{1}\)</span></td>
+</tr>
+<tr class="odd">
+<td>Total</td>
+<td><span class="math inline">\(R\)</span></td>
+<td><span class="math inline">\(n - R\)</span></td>
+<td><span class="math inline">\(n\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><span class="math inline">\(V\)</span> represents the number of type I errors (false positives);</li>
+<li><span class="math inline">\(n_{1} - S\)</span> represents the number of type II errors (false negatives);</li>
+<li><span class="math inline">\(S\)</span> is the number of true positives and <span class="math inline">\(n_{0} - V\)</span> the number of true negatives.</li>
+</ul>
+<p>A multiple testing correction procedure is needed to adjust the statistical confidence measures based on the number of tests performed. Different error rates are defined for this purpose:</p>
+<ul>
+<li>Family wise error rate:</li>
+</ul>
+<p><span class="math display">\[FWER = P_{r}\left (V \geq  1  \right ) = 1 - P_{r}\left (V = 0   \right )\]</span></p>
+<p>is the probability of making one or more false discoveries, or type I errors when performing multiple hypotheses tests.</p>
+<ul>
+<li>False discovery rate:</li>
+</ul>
+<p><span class="math display">\[FDR=E\left \lfloor \frac{V}{V+S} \right \rfloor\]</span></p>
+<p>is the expected proportion of “discoveries” (rejected null hypotheses) that are false (incorrect rejections).</p>
+<ul>
+<li><p>Suppose 1200 out of 20,000 genes are found significant at 0.05 level (threshold <span class="math inline">\(\alpha = 0.05\)</span>).</p>
+<ul>
+<li>No correction: expect 0.05 * 20,000 = 1000 false positives</li>
+<li><span style="color:blue">False Discovery Rate correction</span>: expect 0.05 * 1200 = 60 false positives</li>
+<li><span style="color:red">Family Wise Error Rate correction</span>: expect no false positives (probability of having at least one false positive is ≤ 0.05)</li>
+</ul></li>
+<li><p><span style="color:blue">Benjamini-Hochberg correction</span>: the p-values are sorted in increasing order and the i-th p-value is considered significant if it’s less or equal to <span class="math inline">\(\frac{i\alpha}{n}\)</span>.</p></li>
+<li><p><span style="color:red">Bonferroni correction</span>: p-values less or equal to α/n are considered significant.</p></li>
+</ul>
+<div class="sourceCode" id="cb107"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb107-1"><a href="dekspresija.html#cb107-1"></a>res <span class="op">=</span> res.sort_values(by<span class="op">=</span>[<span class="st">&#39;pval&#39;</span>])</span>
+<span id="cb107-2"><a href="dekspresija.html#cb107-2"></a>m <span class="op">=</span> res.shape[<span class="dv">0</span>]</span>
+<span id="cb107-3"><a href="dekspresija.html#cb107-3"></a>qval <span class="op">=</span> np.zeros(m)</span>
+<span id="cb107-4"><a href="dekspresija.html#cb107-4"></a></span>
+<span id="cb107-5"><a href="dekspresija.html#cb107-5"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, m):</span>
+<span id="cb107-6"><a href="dekspresija.html#cb107-6"></a>    qval[i] <span class="op">=</span> (res[<span class="st">&#39;pval&#39;</span>][i]<span class="op">*</span>m<span class="op">/</span>(i<span class="op">+</span><span class="dv">1</span>))</span>
+<span id="cb107-7"><a href="dekspresija.html#cb107-7"></a>    </span>
+<span id="cb107-8"><a href="dekspresija.html#cb107-8"></a>res[<span class="st">&#39;qval&#39;</span>] <span class="op">=</span> qval</span>
+<span id="cb107-9"><a href="dekspresija.html#cb107-9"></a></span>
+<span id="cb107-10"><a href="dekspresija.html#cb107-10"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb107-11"><a href="dekspresija.html#cb107-11"></a>res[<span class="st">&#39;de&#39;</span>] <span class="op">=</span> res[<span class="st">&#39;qval&#39;</span>] <span class="op">&lt;</span> alpha</span></code></pre></div>
+<p>After performing Benjamini-Hochberg (FDR) correction:</p>
+<div class="sourceCode" id="cb108"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb108-1"><a href="dekspresija.html#cb108-1"></a>res.head(<span class="dv">6</span>)</span></code></pre></div>
+<pre><code>##                    pval      qval    de
+## gene                                   
+## FLRT3      9.418961e-10  0.000001  True
+## PLCG1-AS1  3.296634e-09  0.000002  True
+## RBM39      3.591833e-09  0.000002  True
+## TOP1       5.383997e-09  0.000002  True
+## RALGAPB    5.399923e-09  0.000001  True
+## RTFDC1     7.302393e-08  0.000016  True</code></pre>
+<div class="sourceCode" id="cb110"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb110-1"><a href="dekspresija.html#cb110-1"></a>res[<span class="st">&#39;qval&#39;</span>].plot.hist(bins<span class="op">=</span><span class="dv">20</span>)</span></code></pre></div>
+<p><img src="RNA-Seq_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+
+</div>
+</div>
+
+
+
+
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="kvantifikacija.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

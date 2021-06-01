@@ -1,0 +1,147 @@
+# Uvod {#uvod}
+
+## DNK i RNK
+
+Dezoksiribonukleinska kiselina (**DNK**) je molekul nosilac genetskih informacija. Kod eukariotskih organizama, najveći broj ovih molekula nalazi se u jedru ćelije, a manji broj u organelama kao što su mitohondrije i hloroplasti (u biljkama). Dugački, vlaknasti molekul DNK nazivamo **hromozom**. Kod čoveka je hromozom dvostruki, spiralno uvijeni niz od 50 do 250 miliona **nukleotida**. Jedan segment tog niza koji kodira molekul ribonukleinske kiseline (RNK) naziva se **gen**, a ceo skup genetskih instrukcija koje nosi neki organizam - **genom**. Gen je funkcionalna jedinica genoma, a ljudski genom sadrži oko 20,000 gena.
+
+Spomenuli smo da su DNK (kao i RNK) molekuli - nizovi nukleotida. Nukleotidi su monomeri nukleinskih kiselina i sastoje se od po jednog molekula:
+
+- Šećera pentoze: dezoksiriboze (u DNK) ili riboze (u RNK);
+- Fosforne kiseline;
+- Azotne baze: purinske (adenin - **A** ili guanin - **G**) ili pirimidinske (citozin - **C**, timin - **T** ili uracil - **U**). Baze u sastavu DNK su A,G,C,T dok kod RNK U zamenjuje T.
+
+<br>
+<center><img src="images/d7875be0401d0b7af58f97b20ca30d1cc1316ef9.jpg" width="600"></center><br>
+<p style="text-align:center;font-size:14px;"> Hemijska struktura nukleotida [["Nucleic acids"](https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids), Figure 3.31, OpenStax College, Biology 2e | CC BY 4.0].</p>
+<br>
+
+I dezoksiriboza i riboza sadrže pet ugljenikovih atoma. U RNK i DNK molekulima, šećeri susednih nukleotida su međusobno povezani fosfatnim grupama koje stvaraju fosfodiestarsku vezu između trećeg (3') i petog (5') ugljenikovog atoma. Pored šećera i fosfatne grupe, nukleotidi sadrže i jednu azotnu bazu koja predstavlja varijabilni deo. Redosled baza u lancu kodira naslednu informaciju.
+
+Svaka baza na jednom lancu spojena je vodoničnim vezama sa komplementarnom bazom na naspramnom lancu. A se sparuje samo sa T i to sa dve vodonične veze, dok se C se sparuje samo sa G sa tri vodonične veze. Vodonične veze se mogu raskinuti i lako ponovo formirati što se stalno i dešava kao posledica raznih procesa u ćeliji (npr. prilikom transkripcije ili replikacije DNK). Dve vodonične veze (A-T) se lakše raskidaju od tri (C-G).
+
+<br>
+<center><img src="images/DNA_chemical_structure03.svg" width="500"></center><br>
+<p style="text-align:center;font-size:14px;"> Hemijska struktura DNK [Madeleine Price Ball | CC0].</p>
+<br>
+
+Uz pomoć alfabeta nukleotidnih baza mozemo zapisati jedan segment DNK lanca kao: ACCTGACGTAA. Samo jedan od dva DNK lanca kodira RNK, tako da se genetički kod zapisuje kao sekvenca nukleotida (baza), a ne baznih parova. Prema konvenciji, DNK ili RNK sekvenca se zapisuje u pravcu od 5' ka 3'.
+
+Svaka ćelija našeg organizma sadrzi praktično istu DNK (osim u [haploidnim](https://sr.wikipedia.org/wiki/%D0%9F%D0%BB%D0%BE%D0%B8%D0%B4%D0%B8%D1%98%D0%B0) polnim ćelijama), ali neke od tih ćelija vrše potpuno različite funkcije. Folikularna ćelija štitaste žlezde i glatka mišićna ćelija očigledno moraju imaju drastično različit metabolizam, ali kako kada je osnovni genetski kod u obe ćelije isti?
+
+## Centralna dogma molekularne biologije
+
+Da bi ćelija ostvarila biohemijske procese neophodne za održavanje života i obavljanje svoje specijalizovane funkcije, ona mora sintetisati proteine. Proteini su katalizatori biohemijskih procesa u ćelijama, a obavljaju još niz važnih uloga uključujući strukturnu, regulatornu, transportnu itd. Funkcija proteina određena je njegovom strukturom, a nju određuje informacija zapisana u genima. Protok ovih informacija opisan je **centralnom dogmom molekularne biologije**, koja bi u (pre)pojednostavljenom obliku mogla da glasi: 
+
+*“DNK određuje RNK, RNK određuje proteine, proteini grade nas.”*
+
+Centralna dogma molekularne biologije definiše osnovni smer protoka biološke informacije.
+
+<center><img src="images/dogma.png" width="500"></center><br>
+
+U ovom toku informacije razlikujemo tri glavna procesa:
+
+1. Informacija sadržana u segmentu DNK niza se može kopirati u RNK kroz proces koji nazivamo **transkripcija** uz posredstvo enzima RNK-polimeraze.
+2. Informacijska RNK (iRNK; eng: messenger RNA - mRNA) nastaje od prekurzorne iRNK (koja je produkt transkripcije) procesom **splajsovanja**, u kojem se uklanjaju tzv. intronske regije (introni).
+3. **Translacijom** nazivan proces sintetizovanja proteina nizanjem amino kiselina po iRNK šablonu. Translacija se obavlja unutar ribozoma - organele sačinjene od ribozomalne RNK (rRNK) i proteina.
+
+<br><center><iframe width="560" height="315" align="middle" src="https://www.youtube.com/embed/gG7uCskUOrA" frameborder="0" allowfullscreen></iframe></center><br>
+
+### Transkripcija
+
+<br><center><img src="images/proc2.png" width="500"></center><br>
+
+Promoterski region je segment duzine 100-1000 baza koji se nalazi uz gen na 5' strani. Ovde se inicijalno vezuje RNK-polimeraza i zapocinje proces transkripcije. Pojacivaci (*enhancers*) mogu biti i udaljeni od pocetka gena i locirani u bilo kom pravcu. Na njih se vezuju transcription faktori koji interaguju sa RNK-polimerazom i tako povećavaju šansu da dođe to transkripcije. Postoje i regioni koje imaju suprotnu regulatornu ulogu.
+
+<br><center><img src="images/proc1.png" width="500"></center><br>
+
+### Splajsovanje
+
+Prvi proizvod transkripcije je takozvani primarni transkript odnosno vec pomenuta prekurzorna iRNK. Ovo je doslovno prepisana sekvenca kodirajuceg lanca od pocetka do kraja gena, osim sto je svako T zamenjeno sa U^[Khan Academy ima odlicnu ilustraciju citavog procesa transkripcije [ovde](https://www.khanacademy.org/science/biology/gene-expression-central-dogma/transcription-of-dna-into-rna/a/overview-of-transcription?modal=1)]. U procesu formiranja zrele iRNK intronske sekvence bivaju uklonjene.
+
+### Translacija
+
+Sinteza proteina se obavlja u ribozomima u procesu u kojem se kod zapisan sa cetiri nukleinske kiseline prevodi u kod 20 aminokiselina koje se nizu po odredjenom obrascu. Ulogu prevodioca igraju tRNK molekuli koji jednim svojim krajem prepoznaju odgovarajuci (komplementaran) kodon^[Kodon = niz od 3 susedna nukleotida. Triplet je i najkraci niz nukleotida koji moze da kodira 20 razlicitih aminokiselina jer je $4^{3}>20$.] na iRNK, a na drugom kraju nose odgovarajuću aminokiselinu.
+
+<br><center><img src="https://cdn.kastatic.org/ka-perseus-images/f5de6355003ee322782b26404ef0733a1d1a61b0.png" width="500"></center><br>
+<p style="text-align:center;font-size:14px;"> Standardni genetski kod [["The genetic code"](https://openstax.org/books/biology/pages/15-1-the-genetic-code#fig-ch15_01_04), Figure 15.4, OpenStax College, Biology | CC BY 3.0].</p>
+<br>
+
+<br><center><img src="images/proc3.png" width="500"></center><br>
+
+DEFINISI OKVIR CITANJA!!!! I PREBACI FUTNOTU OVDE NEGDE
+
+**UTR** (od *UnTranslated Region*) su netranslirajuci (koji ne kodiraju aminokiseline, tj nalaze se van okvira citanja) regioni bogati regulatornim sekvencama koje uticu na regulaciju translacije iRNK kojoj pripadaju.
+
+<br><center><img src="images/proc4.png" width="500"></center><br>
+
+## Vrste RNK
+
+Spomenuli smo ribozome i tRNK, pa je vreme da napomenemo da postoji vise vrsta RNK molekula: informacijska (iRNK), transportna RNK (tRNK), ribozomalna RNK (rRNK), kratka i duga nekodirajuca RNK (nkRNK).
+
+Samo iRNK kodira proteine, a broj danas poznatih nekodirajucih gena veci je od broja kodirajucih.
+
+Navodeci centralnu dogmu molekularne biologije, definisali smo osnovni smer protoka biološke informacije. Ovde se pod pojmom *informacije* podrazumeva kod predstavljen nizom DNK nukleotida koji se prevodi u niz RNK nukleotida i najzad iz niza RNK nukleotida u niz aminokiselina polipeptidnog lanca. Zato je ovaj tok informacije prikazan kao jednosmeran. Naravno, proces sinteze proteina mora biti regulisan jer aktivnost određenog gena varira u vremenu i od ćelije do ćelije, pa nekakva povratna sprega postoji. Ona se formira uz pomoc velikog broja nekodirajucih gena koji vrse vazne regulatorne funkcije i tako ucestvuju u procesu ekspresije gena. Ovi geni osim procesa transkripcije i translacije regulisu i jos jedan izuzetno vazan proces - replikaciju DNK.
+
+Informaciona RNK zastupljena je sa oko ~5% u ćelijama sisara, ribozomalna RNK ~80%, transportna RNK (učestvuje u procesu translacije) ~15% ... 
+
+<br><center><img src="images/Peptide_syn.png" width="400"></center><br>
+
+## Alternativno splajsovanje
+
+Od jednog gena, nakon slajsinga, mogu nastati razlicite varijante iRNK molekula koje nazivamo **transkripti** (ili **izoforme**). Ekvivalentno relaciji gen-genom, 'katalog' svih mogućih transkripata zovemo **transkritom**.
+
+<br><center><img src="images/isoforms.png" width="700"></center>
+
+Alternativno splajsovanje je proces kojim od prekursorkse iRNK koji je doslovno prepisan DNK kod nastaje iRNK koji će kodirati protein. Splajsovanjem dolazi do odstranjivanja intronskih regija (introna), ali se isto može desiti i pojedinim eksonima. Rezultujući različiti mRNA molekuli mogu biti translirani u različite proteine, odnosno - jedan gen može da kodira više proteina.
+
+Alternativno splajsovanje se javlja kao normalna pojava kod eukariota, gde znatno povećava raznovrsnost proteina. Kod ljudi preko 80% gena su alternativno splajsovani. Brojni modovi alternativnog splajsovanja su uočeni, od kojih najčešći jeste preskakanje egzona. U tom modu, pojedini egzon može biti uključen u iRNK pod nekim uslovima ili u pojedinim tkivima, i izostavljen iz iRNK u drugim.
+
+Ovo je nešto što će otežati problem mapiranja na referentni genom. Aligner mora biti 'splice aware'!
+
+## Ciljevi proucavanja RNK
+
+KVANTITAVINA/KVALITATIVNA ANALIZA
+
+- Rekonstrukcija transkriptoma - kompletnog seta transkripata gena pronadjenih u celijama uzorka;
+- Estimacija nivoa ekspresije gena/transkripata. 
+
+*Zašto merimo ekspresiju gena?*
+
+Proteini (belančevine) predstavljaju za žive sisteme najznačajnije organske molekule. Osim što izgrađuju ćeliju i njene delove, proteini obavljaju i sve osnovne funkcije u organizmu. 
+
+I dalje je izuzetno komplikovano direktno izmeriti relativnu zastupljenost određenog proteina u uzorku. Trenutno raspoložive tehnologije su takve da je neuporedivo lakše (i jeftinije) izmeriti relativnu zastupljenost iRNK molekula koji kodira taj protein.
+
+**Because gene expression correlates with protein expression!**
+
+Even though nearly every cell in an organism's body contains the same set of genes, only a fraction of these genes are used in any given cell at any given time. It is this carefully controlled pattern of what is called "gene expression" that makes a liver cell different from a muscle cell, and a healthy cell different from a cancer cell. 
+
+By measuring gene expression, we can identify active and inactive genes in a cell or tissue. This knowledge is important for drug discovery and creating diagnostic tests.
+
+## RNK sekvenciranje
+
+- A major breakthrough (replaced microarrays) in the late 00’s and has been widely used since.
+- Uses next-generation sequencing (NGS) to reveal the presence and quantity of RNA in a biological sample at a given moment.
+- Able to detect novel (undiscovered) isoforms and has a broader dynamic range compapred to microarrays.
+
+<br><center><img src="images/Bo7TRo5IUAAJ6KD.jpg" width="450"></center><br>
+
+Procedura izolacije RNK je nesto zahtevnija od procudere izolovanja DNK, najvise zbog otpornosti ribunukleaza (RNAza) - enzima koji razlažu fosfodiestarske veze između susednih nukleotida u RNK lancu i koji se oslobađaju kada dođe do degradacije ćelija, ali ih ima i u našem okruženju. Neke se oslobađaju i sa ljudske kože, pa su glavni izvor RNaza sami istraživači.
+
+Most of the RNA in a cell is ribosomal RNA (an RNA component of ribosome which is approx 60% rRNA and 40% protein). This is an issue since most scientists (and enthusiasts like us) will be interested in mRNA because of its protein coding function. Istrazivace najcesce interesuje informaciona RNK koja je zastupljena sa tek oko ~5% u ćelijama sisara, pa ju je potrebno selektovati iz izolovanog uzorka RNK ili selektivno denaturisati ribozomalnu RNK koja je ubedljivo najzastupljenija.
+
+To make the RNA suitable for RNA-seq it is typically fragmented and then the quality and fragmentation are assessed.
+    
+<br><center><iframe width="560" height="315" src="https://www.youtube.com/embed/womKfikWlxM" frameborder="0" allowfullscreen></iframe></center><br>
+
+## DNK mikročip (microarray)
+
+U upotrebi od kasnih 80ih, DNK mikročip je mikroskopski slajd na kojem je matrica sa više hiljada polja. Svako polje sadrži nekoliko pikomola specifične DNK sekvence - probe, koje detektuju gensku ekspresiju.
+Molekuli RNA uzorka su obelezeni floroscentnim probama. Ovi molekuli se vezuju za sebi komplementarne probe na mikročipu u procesu koji se zove hibridizacija. Ocitavanjem nivoa svetlosti emitovane iz svakog polja odredjuje se relativna zastupljenost te sekvence u uzorku.
+
+<br><center><iframe width="560" height="315" src="https://www.youtube.com/embed/1_wDrqgS8w8" frameborder="0" allowfullscreen></iframe></center><br>
+
+## Literatura
+
+Molekularna biologija 1; Dušanka Savić-Pavićević, Gordana Matić;  NNK International, 2020
+
+[RNA-seqlopedia](https://rnaseq.uoregon.edu/); Cresko Lab, University of Oregon

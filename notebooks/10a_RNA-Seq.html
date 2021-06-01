@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 Uvod | Analiza RNA-Seq podataka</title>
+  <meta name="description" content="Materijali za deo kursa posvecen analizi RNA-Seq podataka" />
+  <meta name="generator" content="bookdown 0.22 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 Uvod | Analiza RNA-Seq podataka" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Materijali za deo kursa posvecen analizi RNA-Seq podataka" />
+  <meta name="github-repo" content="markozecevic/RNA-Seq" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Uvod | Analiza RNA-Seq podataka" />
+  
+  <meta name="twitter:description" content="Materijali za deo kursa posvecen analizi RNA-Seq podataka" />
+  
+
+<meta name="author" content="marko.zecevic@sbgenomics.com" />
+
+
+<meta name="date" content="2021-05-15" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="poravnanje.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Podešavanja</a></li>
+<li class="chapter" data-level="1" data-path="uvod.html"><a href="uvod.html"><i class="fa fa-check"></i><b>1</b> Uvod</a><ul>
+<li class="chapter" data-level="1.1" data-path="uvod.html"><a href="uvod.html#dnk-i-rnk"><i class="fa fa-check"></i><b>1.1</b> DNK i RNK</a></li>
+<li class="chapter" data-level="1.2" data-path="uvod.html"><a href="uvod.html#centralna-dogma-molekularne-biologije"><i class="fa fa-check"></i><b>1.2</b> Centralna dogma molekularne biologije</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="uvod.html"><a href="uvod.html#transkripcija"><i class="fa fa-check"></i><b>1.2.1</b> Transkripcija</a></li>
+<li class="chapter" data-level="1.2.2" data-path="uvod.html"><a href="uvod.html#splajsovanje"><i class="fa fa-check"></i><b>1.2.2</b> Splajsovanje</a></li>
+<li class="chapter" data-level="1.2.3" data-path="uvod.html"><a href="uvod.html#translacija"><i class="fa fa-check"></i><b>1.2.3</b> Translacija</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="uvod.html"><a href="uvod.html#vrste-rnk"><i class="fa fa-check"></i><b>1.3</b> Vrste RNK</a></li>
+<li class="chapter" data-level="1.4" data-path="uvod.html"><a href="uvod.html#alternativno-splajsovanje"><i class="fa fa-check"></i><b>1.4</b> Alternativno splajsovanje</a></li>
+<li class="chapter" data-level="1.5" data-path="uvod.html"><a href="uvod.html#ciljevi-proucavanja-rnk"><i class="fa fa-check"></i><b>1.5</b> Ciljevi proucavanja RNK</a></li>
+<li class="chapter" data-level="1.6" data-path="uvod.html"><a href="uvod.html#rnk-sekvenciranje"><i class="fa fa-check"></i><b>1.6</b> RNK sekvenciranje</a></li>
+<li class="chapter" data-level="1.7" data-path="uvod.html"><a href="uvod.html#dnk-mikročip-microarray"><i class="fa fa-check"></i><b>1.7</b> DNK mikročip (microarray)</a></li>
+<li class="chapter" data-level="1.8" data-path="uvod.html"><a href="uvod.html#literatura"><i class="fa fa-check"></i><b>1.8</b> Literatura</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="poravnanje.html"><a href="poravnanje.html"><i class="fa fa-check"></i><b>2</b> Poravnanje</a><ul>
+<li class="chapter" data-level="2.1" data-path="poravnanje.html"><a href="poravnanje.html#alignment-challenges"><i class="fa fa-check"></i><b>2.1</b> Alignment challenges</a></li>
+<li class="chapter" data-level="2.2" data-path="poravnanje.html"><a href="poravnanje.html#tophat2-algorithm"><i class="fa fa-check"></i><b>2.2</b> Tophat2 algorithm</a></li>
+<li class="chapter" data-level="2.3" data-path="poravnanje.html"><a href="poravnanje.html#alignment-file"><i class="fa fa-check"></i><b>2.3</b> Alignment file</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="kvantifikacija.html"><a href="kvantifikacija.html"><i class="fa fa-check"></i><b>3</b> Kvantifikacija</a><ul>
+<li class="chapter" data-level="3.1" data-path="kvantifikacija.html"><a href="kvantifikacija.html#motivation-for-rna-seq-quantification"><i class="fa fa-check"></i><b>3.1</b> Motivation for RNA-Seq quantification</a></li>
+<li class="chapter" data-level="3.2" data-path="kvantifikacija.html"><a href="kvantifikacija.html#rna-seq-quantification"><i class="fa fa-check"></i><b>3.2</b> RNA-Seq quantification</a></li>
+<li class="chapter" data-level="3.3" data-path="kvantifikacija.html"><a href="kvantifikacija.html#gene-level-quantification"><i class="fa fa-check"></i><b>3.3</b> Gene level quantification</a></li>
+<li class="chapter" data-level="3.4" data-path="kvantifikacija.html"><a href="kvantifikacija.html#within-sample-normalization"><i class="fa fa-check"></i><b>3.4</b> (Within-sample) Normalization</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="kvantifikacija.html"><a href="kvantifikacija.html#different-units"><i class="fa fa-check"></i><b>3.4.1</b> Different units</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="dekspresija.html"><a href="dekspresija.html"><i class="fa fa-check"></i><b>4</b> Diferencijalna ekspresija</a><ul>
+<li class="chapter" data-level="4.1" data-path="dekspresija.html"><a href="dekspresija.html#diferencijalna-eskpresija"><i class="fa fa-check"></i><b>4.1</b> Diferencijalna Eskpresija</a></li>
+<li class="chapter" data-level="4.2" data-path="dekspresija.html"><a href="dekspresija.html#between-sample-normalization"><i class="fa fa-check"></i><b>4.2</b> Between-sample normalization</a></li>
+<li class="chapter" data-level="4.3" data-path="dekspresija.html"><a href="dekspresija.html#exploratory-analysis"><i class="fa fa-check"></i><b>4.3</b> Exploratory analysis</a></li>
+<li class="chapter" data-level="4.4" data-path="dekspresija.html"><a href="dekspresija.html#intro-to-statistical-inference"><i class="fa fa-check"></i><b>4.4</b> Intro to statistical inference</a></li>
+<li class="chapter" data-level="4.5" data-path="dekspresija.html"><a href="dekspresija.html#central-limit-theorem"><i class="fa fa-check"></i><b>4.5</b> Central Limit Theorem</a></li>
+<li class="chapter" data-level="4.6" data-path="dekspresija.html"><a href="dekspresija.html#the-t-distribution"><i class="fa fa-check"></i><b>4.6</b> The t-distribution</a></li>
+<li class="chapter" data-level="4.7" data-path="dekspresija.html"><a href="dekspresija.html#multiple-testing"><i class="fa fa-check"></i><b>4.7</b> Multiple testing</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Analiza RNA-Seq podataka</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="uvod" class="section level1">
+<h1><span class="header-section-number">1</span> Uvod</h1>
+<div id="dnk-i-rnk" class="section level2">
+<h2><span class="header-section-number">1.1</span> DNK i RNK</h2>
+<p>Dezoksiribonukleinska kiselina (<strong>DNK</strong>) je molekul nosilac genetskih informacija. Kod eukariotskih organizama, najveći broj ovih molekula nalazi se u jedru ćelije, a manji broj u organelama kao što su mitohondrije i hloroplasti (u biljkama). Dugački, vlaknasti molekul DNK nazivamo <strong>hromozom</strong>. Kod čoveka je hromozom dvostruki, spiralno uvijeni niz od 50 do 250 miliona <strong>nukleotida</strong>. Jedan segment tog niza koji kodira molekul ribonukleinske kiseline (RNK) naziva se <strong>gen</strong>, a ceo skup genetskih instrukcija koje nosi neki organizam - <strong>genom</strong>. Gen je funkcionalna jedinica genoma, a ljudski genom sadrži oko 20,000 gena.</p>
+<p>Spomenuli smo da su DNK (kao i RNK) molekuli - nizovi nukleotida. Nukleotidi su monomeri nukleinskih kiselina i sastoje se od po jednog molekula:</p>
+<ul>
+<li>Šećera pentoze: dezoksiriboze (u DNK) ili riboze (u RNK);</li>
+<li>Fosforne kiseline;</li>
+<li>Azotne baze: purinske (adenin - <strong>A</strong> ili guanin - <strong>G</strong>) ili pirimidinske (citozin - <strong>C</strong>, timin - <strong>T</strong> ili uracil - <strong>U</strong>). Baze u sastavu DNK su A,G,C,T dok kod RNK U zamenjuje T.</li>
+</ul>
+<br>
+<center>
+<img src="images/d7875be0401d0b7af58f97b20ca30d1cc1316ef9.jpg" width="600">
+</center>
+<br>
+<p style="text-align:center;font-size:14px;">
+Hemijska struktura nukleotida [<a href="https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids">“Nucleic acids”</a>, Figure 3.31, OpenStax College, Biology 2e | CC BY 4.0].
+</p>
+<p><br></p>
+<p>I dezoksiriboza i riboza sadrže pet ugljenikovih atoma. U RNK i DNK molekulima, šećeri susednih nukleotida su međusobno povezani fosfatnim grupama koje stvaraju fosfodiestarsku vezu između trećeg (3’) i petog (5’) ugljenikovog atoma. Pored šećera i fosfatne grupe, nukleotidi sadrže i jednu azotnu bazu koja predstavlja varijabilni deo. Redosled baza u lancu kodira naslednu informaciju.</p>
+<p>Svaka baza na jednom lancu spojena je vodoničnim vezama sa komplementarnom bazom na naspramnom lancu. A se sparuje samo sa T i to sa dve vodonične veze, dok se C se sparuje samo sa G sa tri vodonične veze. Vodonične veze se mogu raskinuti i lako ponovo formirati što se stalno i dešava kao posledica raznih procesa u ćeliji (npr. prilikom transkripcije ili replikacije DNK). Dve vodonične veze (A-T) se lakše raskidaju od tri (C-G).</p>
+<br>
+<center>
+<img src="images/DNA_chemical_structure03.svg" width="500">
+</center>
+<br>
+<p style="text-align:center;font-size:14px;">
+Hemijska struktura DNK [Madeleine Price Ball | CC0].
+</p>
+<p><br></p>
+<p>Uz pomoć alfabeta nukleotidnih baza mozemo zapisati jedan segment DNK lanca kao: ACCTGACGTAA. Samo jedan od dva DNK lanca kodira RNK, tako da se genetički kod zapisuje kao sekvenca nukleotida (baza), a ne baznih parova. Prema konvenciji, DNK ili RNK sekvenca se zapisuje u pravcu od 5’ ka 3’.</p>
+<p>Svaka ćelija našeg organizma sadrzi praktično istu DNK (osim u <a href="https://sr.wikipedia.org/wiki/%D0%9F%D0%BB%D0%BE%D0%B8%D0%B4%D0%B8%D1%98%D0%B0">haploidnim</a> polnim ćelijama), ali neke od tih ćelija vrše potpuno različite funkcije. Folikularna ćelija štitaste žlezde i glatka mišićna ćelija očigledno moraju imaju drastično različit metabolizam, ali kako kada je osnovni genetski kod u obe ćelije isti?</p>
+</div>
+<div id="centralna-dogma-molekularne-biologije" class="section level2">
+<h2><span class="header-section-number">1.2</span> Centralna dogma molekularne biologije</h2>
+<p>Da bi ćelija ostvarila biohemijske procese neophodne za održavanje života i obavljanje svoje specijalizovane funkcije, ona mora sintetisati proteine. Proteini su katalizatori biohemijskih procesa u ćelijama, a obavljaju još niz važnih uloga uključujući strukturnu, regulatornu, transportnu itd. Funkcija proteina određena je njegovom strukturom, a nju određuje informacija zapisana u genima. Protok ovih informacija opisan je <strong>centralnom dogmom molekularne biologije</strong>, koja bi u (pre)pojednostavljenom obliku mogla da glasi:</p>
+<p><em>“DNK određuje RNK, RNK određuje proteine, proteini grade nas.”</em></p>
+<p>Centralna dogma molekularne biologije definiše osnovni smer protoka biološke informacije.</p>
+<center>
+<img src="images/dogma.png" width="500">
+</center>
+<p><br></p>
+<p>U ovom toku informacije razlikujemo tri glavna procesa:</p>
+<ol style="list-style-type: decimal">
+<li>Informacija sadržana u segmentu DNK niza se može kopirati u RNK kroz proces koji nazivamo <strong>transkripcija</strong> uz posredstvo enzima RNK-polimeraze.</li>
+<li>Informacijska RNK (iRNK; eng: messenger RNA - mRNA) nastaje od prekurzorne iRNK (koja je produkt transkripcije) procesom <strong>splajsovanja</strong>, u kojem se uklanjaju tzv. intronske regije (introni).</li>
+<li><strong>Translacijom</strong> nazivan proces sintetizovanja proteina nizanjem amino kiselina po iRNK šablonu. Translacija se obavlja unutar ribozoma - organele sačinjene od ribozomalne RNK (rRNK) i proteina.</li>
+</ol>
+<br>
+<center>
+<iframe width="560" height="315" align="middle" src="https://www.youtube.com/embed/gG7uCskUOrA" frameborder="0" allowfullscreen>
+</iframe>
+</center>
+<p><br></p>
+<div id="transkripcija" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Transkripcija</h3>
+<br>
+<center>
+<img src="images/proc2.png" width="500">
+</center>
+<p><br></p>
+<p>Promoterski region je segment duzine 100-1000 baza koji se nalazi uz gen na 5’ strani. Ovde se inicijalno vezuje RNK-polimeraza i zapocinje proces transkripcije. Pojacivaci (<em>enhancers</em>) mogu biti i udaljeni od pocetka gena i locirani u bilo kom pravcu. Na njih se vezuju transcription faktori koji interaguju sa RNK-polimerazom i tako povećavaju šansu da dođe to transkripcije. Postoje i regioni koje imaju suprotnu regulatornu ulogu.</p>
+<br>
+<center>
+<img src="images/proc1.png" width="500">
+</center>
+<p><br></p>
+</div>
+<div id="splajsovanje" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Splajsovanje</h3>
+<p>Prvi proizvod transkripcije je takozvani primarni transkript odnosno vec pomenuta prekurzorna iRNK. Ovo je doslovno prepisana sekvenca kodirajuceg lanca od pocetka do kraja gena, osim sto je svako T zamenjeno sa U<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. U procesu formiranja zrele iRNK intronske sekvence bivaju uklonjene.</p>
+</div>
+<div id="translacija" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Translacija</h3>
+<p>Sinteza proteina se obavlja u ribozomima u procesu u kojem se kod zapisan sa cetiri nukleinske kiseline prevodi u kod 20 aminokiselina koje se nizu po odredjenom obrascu. Ulogu prevodioca igraju tRNK molekuli koji jednim svojim krajem prepoznaju odgovarajuci (komplementaran) kodon<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> na iRNK, a na drugom kraju nose odgovarajuću aminokiselinu.</p>
+<br>
+<center>
+<img src="https://cdn.kastatic.org/ka-perseus-images/f5de6355003ee322782b26404ef0733a1d1a61b0.png" width="500">
+</center>
+<br>
+<p style="text-align:center;font-size:14px;">
+Standardni genetski kod [<a href="https://openstax.org/books/biology/pages/15-1-the-genetic-code#fig-ch15_01_04">“The genetic code”</a>, Figure 15.4, OpenStax College, Biology | CC BY 3.0].
+</p>
+<p><br></p>
+<br>
+<center>
+<img src="images/proc3.png" width="500">
+</center>
+<p><br></p>
+<p>DEFINISI OKVIR CITANJA!!!! I PREBACI FUTNOTU OVDE NEGDE</p>
+<p><strong>UTR</strong> (od <em>UnTranslated Region</em>) su netranslirajuci (koji ne kodiraju aminokiseline, tj nalaze se van okvira citanja) regioni bogati regulatornim sekvencama koje uticu na regulaciju translacije iRNK kojoj pripadaju.</p>
+<br>
+<center>
+<img src="images/proc4.png" width="500">
+</center>
+<p><br></p>
+</div>
+</div>
+<div id="vrste-rnk" class="section level2">
+<h2><span class="header-section-number">1.3</span> Vrste RNK</h2>
+<p>Spomenuli smo ribozome i tRNK, pa je vreme da napomenemo da postoji vise vrsta RNK molekula: informacijska (iRNK), transportna RNK (tRNK), ribozomalna RNK (rRNK), kratka i duga nekodirajuca RNK (nkRNK).</p>
+<p>Samo iRNK kodira proteine, a broj danas poznatih nekodirajucih gena veci je od broja kodirajucih.</p>
+<p>Navodeci centralnu dogmu molekularne biologije, definisali smo osnovni smer protoka biološke informacije. Ovde se pod pojmom <em>informacije</em> podrazumeva kod predstavljen nizom DNK nukleotida koji se prevodi u niz RNK nukleotida i najzad iz niza RNK nukleotida u niz aminokiselina polipeptidnog lanca. Zato je ovaj tok informacije prikazan kao jednosmeran. Naravno, proces sinteze proteina mora biti regulisan jer aktivnost određenog gena varira u vremenu i od ćelije do ćelije, pa nekakva povratna sprega postoji. Ona se formira uz pomoc velikog broja nekodirajucih gena koji vrse vazne regulatorne funkcije i tako ucestvuju u procesu ekspresije gena. Ovi geni osim procesa transkripcije i translacije regulisu i jos jedan izuzetno vazan proces - replikaciju DNK.</p>
+<p>Informaciona RNK zastupljena je sa oko ~5% u ćelijama sisara, ribozomalna RNK ~80%, transportna RNK (učestvuje u procesu translacije) ~15% …</p>
+<br>
+<center>
+<img src="images/Peptide_syn.png" width="400">
+</center>
+<p><br></p>
+</div>
+<div id="alternativno-splajsovanje" class="section level2">
+<h2><span class="header-section-number">1.4</span> Alternativno splajsovanje</h2>
+<p>Od jednog gena, nakon slajsinga, mogu nastati razlicite varijante iRNK molekula koje nazivamo <strong>transkripti</strong> (ili <strong>izoforme</strong>). Ekvivalentno relaciji gen-genom, ‘katalog’ svih mogućih transkripata zovemo <strong>transkritom</strong>.</p>
+<br>
+<center>
+<img src="images/isoforms.png" width="700">
+</center>
+<p>Alternativno splajsovanje je proces kojim od prekursorkse iRNK koji je doslovno prepisan DNK kod nastaje iRNK koji će kodirati protein. Splajsovanjem dolazi do odstranjivanja intronskih regija (introna), ali se isto može desiti i pojedinim eksonima. Rezultujući različiti mRNA molekuli mogu biti translirani u različite proteine, odnosno - jedan gen može da kodira više proteina.</p>
+<p>Alternativno splajsovanje se javlja kao normalna pojava kod eukariota, gde znatno povećava raznovrsnost proteina. Kod ljudi preko 80% gena su alternativno splajsovani. Brojni modovi alternativnog splajsovanja su uočeni, od kojih najčešći jeste preskakanje egzona. U tom modu, pojedini egzon može biti uključen u iRNK pod nekim uslovima ili u pojedinim tkivima, i izostavljen iz iRNK u drugim.</p>
+<p>Ovo je nešto što će otežati problem mapiranja na referentni genom. Aligner mora biti ‘splice aware’!</p>
+</div>
+<div id="ciljevi-proucavanja-rnk" class="section level2">
+<h2><span class="header-section-number">1.5</span> Ciljevi proucavanja RNK</h2>
+<p>KVANTITAVINA/KVALITATIVNA ANALIZA</p>
+<ul>
+<li>Rekonstrukcija transkriptoma - kompletnog seta transkripata gena pronadjenih u celijama uzorka;</li>
+<li>Estimacija nivoa ekspresije gena/transkripata.</li>
+</ul>
+<p><em>Zašto merimo ekspresiju gena?</em></p>
+<p>Proteini (belančevine) predstavljaju za žive sisteme najznačajnije organske molekule. Osim što izgrađuju ćeliju i njene delove, proteini obavljaju i sve osnovne funkcije u organizmu.</p>
+<p>I dalje je izuzetno komplikovano direktno izmeriti relativnu zastupljenost određenog proteina u uzorku. Trenutno raspoložive tehnologije su takve da je neuporedivo lakše (i jeftinije) izmeriti relativnu zastupljenost iRNK molekula koji kodira taj protein.</p>
+<p><strong>Because gene expression correlates with protein expression!</strong></p>
+<p>Even though nearly every cell in an organism’s body contains the same set of genes, only a fraction of these genes are used in any given cell at any given time. It is this carefully controlled pattern of what is called “gene expression” that makes a liver cell different from a muscle cell, and a healthy cell different from a cancer cell.</p>
+<p>By measuring gene expression, we can identify active and inactive genes in a cell or tissue. This knowledge is important for drug discovery and creating diagnostic tests.</p>
+</div>
+<div id="rnk-sekvenciranje" class="section level2">
+<h2><span class="header-section-number">1.6</span> RNK sekvenciranje</h2>
+<ul>
+<li>A major breakthrough (replaced microarrays) in the late 00’s and has been widely used since.</li>
+<li>Uses next-generation sequencing (NGS) to reveal the presence and quantity of RNA in a biological sample at a given moment.</li>
+<li>Able to detect novel (undiscovered) isoforms and has a broader dynamic range compapred to microarrays.</li>
+</ul>
+<br>
+<center>
+<img src="images/Bo7TRo5IUAAJ6KD.jpg" width="450">
+</center>
+<p><br></p>
+<p>Procedura izolacije RNK je nesto zahtevnija od procudere izolovanja DNK, najvise zbog otpornosti ribunukleaza (RNAza) - enzima koji razlažu fosfodiestarske veze između susednih nukleotida u RNK lancu i koji se oslobađaju kada dođe do degradacije ćelija, ali ih ima i u našem okruženju. Neke se oslobađaju i sa ljudske kože, pa su glavni izvor RNaza sami istraživači.</p>
+<p>Most of the RNA in a cell is ribosomal RNA (an RNA component of ribosome which is approx 60% rRNA and 40% protein). This is an issue since most scientists (and enthusiasts like us) will be interested in mRNA because of its protein coding function. Istrazivace najcesce interesuje informaciona RNK koja je zastupljena sa tek oko ~5% u ćelijama sisara, pa ju je potrebno selektovati iz izolovanog uzorka RNK ili selektivno denaturisati ribozomalnu RNK koja je ubedljivo najzastupljenija.</p>
+<p>To make the RNA suitable for RNA-seq it is typically fragmented and then the quality and fragmentation are assessed.</p>
+<br>
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/womKfikWlxM" frameborder="0" allowfullscreen>
+</iframe>
+</center>
+<p><br></p>
+</div>
+<div id="dnk-mikročip-microarray" class="section level2">
+<h2><span class="header-section-number">1.7</span> DNK mikročip (microarray)</h2>
+<p>U upotrebi od kasnih 80ih, DNK mikročip je mikroskopski slajd na kojem je matrica sa više hiljada polja. Svako polje sadrži nekoliko pikomola specifične DNK sekvence - probe, koje detektuju gensku ekspresiju.
+Molekuli RNA uzorka su obelezeni floroscentnim probama. Ovi molekuli se vezuju za sebi komplementarne probe na mikročipu u procesu koji se zove hibridizacija. Ocitavanjem nivoa svetlosti emitovane iz svakog polja odredjuje se relativna zastupljenost te sekvence u uzorku.</p>
+<br>
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/1_wDrqgS8w8" frameborder="0" allowfullscreen>
+</iframe>
+</center>
+<p><br></p>
+</div>
+<div id="literatura" class="section level2">
+<h2><span class="header-section-number">1.8</span> Literatura</h2>
+<p>Molekularna biologija 1; Dušanka Savić-Pavićević, Gordana Matić; NNK International, 2020</p>
+<p><a href="https://rnaseq.uoregon.edu/">RNA-seqlopedia</a>; Cresko Lab, University of Oregon</p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Khan Academy ima odlicnu ilustraciju citavog procesa transkripcije <a href="https://www.khanacademy.org/science/biology/gene-expression-central-dogma/transcription-of-dna-into-rna/a/overview-of-transcription?modal=1">ovde</a><a href="uvod.html#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>Kodon = niz od 3 susedna nukleotida. Triplet je i najkraci niz nukleotida koji moze da kodira 20 razlicitih aminokiselina jer je <span class="math inline">\(4^{3}&gt;20\)</span>.<a href="uvod.html#fnref2" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="poravnanje.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
